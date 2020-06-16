@@ -1,0 +1,24 @@
+{
+    "name": "santran/signalr",
+    "description": "Signal R Client",
+    "keywords": ["Signal R", "WebSocket"],
+    "license": "MIT",
+    "repositories": [ {
+            "type": "vcs",
+            "url": "https://github.com/mrsantran/signalr"
+    }],
+    "require": {
+        "php": ">=5.4",
+        "ratchet/pawl": "^0.3.0",
+        "guzzlehttp/guzzle": "^6.3"
+    },
+    "config": {
+    	"optimize-autoloader": true,
+        "minimum-stability": "stable"
+    },
+    "autoload": {
+        "classmap": [
+          "signalr.php"
+        ]
+    }
+}
