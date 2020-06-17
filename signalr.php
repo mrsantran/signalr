@@ -165,7 +165,7 @@ print_r($subscribeMsg);
             $url = $this->buildNegotiateUrl();
             print_r($url);
             $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET', $url);
+            $res = $client->request('GET', $url, ['verify' => false]);
             print_r($res);
             $body = json_decode($res->getBody());
             print_r($body);
@@ -182,7 +182,7 @@ print_r($subscribeMsg);
         try {
             $url = $this->buildStartUrl();
             $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET', $url);
+            $res = $client->request('GET', $url, ['verify' => false]);
 
             $body = json_decode($res->getBody());
 
