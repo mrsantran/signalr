@@ -51,7 +51,7 @@ class Client {
         $connectUrl = $this->buildConnectUrl();
         print_r($connectUrl);
         $connector($connectUrl)->then(function ( $ws ) { //use ($callback, $symbol, $loop, $endpoint ) {
-            
+
                 $ws->on('message', function ( $data ) use ($ws) { //, $callback, $loop, $endpoint ) {
                     print_r(json_decode($data));
                     //$this->subscribe($ws);
@@ -77,17 +77,17 @@ print_r($subscribeMsg);
                 //echo "depthCache({$symbol})) Could not connect: {$e->getMessage()}" . PHP_EOL;
                 $this->loop->stop();
             });
-            
-            
-            
-            
+
+
+
+
 //        $connector($connectUrl)->then(function(\Ratchet\Client\WebSocket $conn) {
 //            $this->subscribe($conn);
 //            $conn->on('message', function(\Ratchet\RFC6455\Messaging\MessageInterface $msg) use ($conn) {
 //                $data = json_decode($msg);
-//                
+//
 //                print_r($data);
-//                
+//
 //                if (\property_exists($data, "M")) {
 //                    foreach ($data->M as $message) {
 //                        $hub = $message->H;
@@ -162,10 +162,10 @@ print_r($subscribeMsg);
 
     private function negotiate() {
         try {
-            $url = $this->buildNegotiateUrl();// . "&_=" . (int) (microtime(true) * 1000);
+            $url = $this->buildNegotiateUrl();
             print_r($url);
             $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET', $url, ['verify' => $this->path]);
+            $res = $client->request('GET', $url);
             print_r($res);
             $body = json_decode($res->getBody());
             print_r($body);
@@ -182,13 +182,13 @@ print_r($subscribeMsg);
         try {
             $url = $this->buildStartUrl();
             $client = new \GuzzleHttp\Client();
-            $res = $client->request('GET', $url, ['verify' => $this->path]);
+            $res = $client->request('GET', $url);
 
             $body = json_decode($res->getBody());
 
             print_r($url);
             print_r($body);
-            
+
             return true;
         } catch (\Exception $e) {
             return false;
@@ -203,7 +203,7 @@ print_r($subscribeMsg);
                     'H' => 'c2',
                     'M' => 'SubscribeToSummaryLiteDeltas',
                     'A' => [],
-                    'I' => 0//$this->messageId
+                    'I' => $this->messageId
                 ]);
 print_r($subscribeMsg);
                 $conn->send($subscribeMsg);
